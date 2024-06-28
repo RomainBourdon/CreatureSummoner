@@ -17,7 +17,9 @@ public class CameraMultiController : MonoBehaviour
     [Tooltip("Should be the Character transform by default")]
 
     public Transform followTarget = null;
+    private Transform newFollowTarget = null;
     public Vector3 focalOffset = new Vector3(0.0f, 0.0f, 0.0f);
+    Vector3 newCamPosition = new Vector3(0f, 0f, 0f);
 
     [Header("Camera Options")]
 
@@ -30,9 +32,15 @@ public class CameraMultiController : MonoBehaviour
 
     private bool active = false;
 
+    private SwapController swapController;
+
     void Start()
     {
         OrbitUpdate();
+
+        swapController = GetComponent<SwapController>();
+
+        newFollowTarget = followTarget;
     }
 
     void LateUpdate()
@@ -57,8 +65,21 @@ public class CameraMultiController : MonoBehaviour
         {
             OrbitUpdate();
         }
-        transform.position = (followTarget ? followTarget.position : Vector3.zero) + focalOffset - transform.forward * viewDistance;
 
+        if(newFollowTarget ==  followTarget)
+        {
+            transform.position = (followTarget ? followTarget.position : Vector3.zero) + focalOffset - transform.forward * viewDistance;
+        }
+        else
+        {
+            newCamPosition = newFollowTarget.position + focalOffset - transform.forward * viewDistance;
+            transform.position = Vector3.Slerp(transform.position, newCamPosition, 10 * Time.deltaTime);
+
+            if (Mathf.Approximately(transform.position.x, newCamPosition.x))
+            {
+                followTarget = newFollowTarget;
+            }
+        }  
     }
     void OrbitUpdate()
     {
@@ -68,6 +89,14 @@ public class CameraMultiController : MonoBehaviour
 
         transform.localRotation = Quaternion.AngleAxis(orbitAngles.y, Vector3.up);
         transform.localRotation *= Quaternion.AngleAxis(orbitAngles.x, Vector3.right);
+    }
+
+    public void ChangeFollowTarget(Transform _newFollowTarget)
+    {
+        newFollowTarget = _newFollowTarget;
+        viewDistance = Mathf.Clamp(viewDistance + Input.mouseScrollDelta.y * Time.deltaTime * -scrollSensitivity, 2.0f, 300.0f);
+        newCamPosition = newFollowTarget.position + focalOffset - transform.forward * viewDistance;
+        Debug.Log(newCamPosition);
     }
 }
 

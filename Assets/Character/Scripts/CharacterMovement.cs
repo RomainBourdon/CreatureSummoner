@@ -25,13 +25,6 @@ public class CharacterMovement : MonoBehaviour
 
     void Update()
     {
-        var yRotation = thirdPersonCamera.transform.localRotation.eulerAngles.y;
-
-        if (thirdPersonCamera.activeInHierarchy)
-        {
-            characterTransform.localRotation = Quaternion.Euler(0, yRotation, 0);
-        }
-
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
         {
@@ -39,8 +32,8 @@ public class CharacterMovement : MonoBehaviour
         }
 
         Vector3 move = new Vector3((thirdPersonCamera.transform.forward.x * Input.GetAxis("Vertical")), 0, (thirdPersonCamera.transform.forward.z * Input.GetAxis("Vertical")));
-            move += new Vector3((thirdPersonCamera.transform.right.x * Input.GetAxis("Horizontal")), 0, (thirdPersonCamera.transform.right.z * Input.GetAxis("Horizontal")));
-            controller.Move(move * Time.deltaTime * playerSpeed);
+        move += new Vector3((thirdPersonCamera.transform.right.x * Input.GetAxis("Horizontal")), 0, (thirdPersonCamera.transform.right.z * Input.GetAxis("Horizontal")));
+        controller.Move(move * Time.deltaTime * playerSpeed);
         
 
         if (move != Vector3.zero)

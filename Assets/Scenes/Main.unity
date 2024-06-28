@@ -227,6 +227,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -325,6 +326,25 @@ MonoBehaviour:
   orbitSensitivity: 65.5
   scrollSensitivity: 200
   viewDistance: 8
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e8ea94aa6623f6408e6edef2bf8250e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 983420325}
+  creature: {fileID: 0}
+--- !u!1 &983420325 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1793296227904093283, guid: 361260e68005db343a7ce426a6ddc055, type: 3}
+  m_PrefabInstance: {fileID: 2381038840638175603}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1351456738 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8757188933665052754, guid: 361260e68005db343a7ce426a6ddc055, type: 3}
@@ -342,7 +362,7 @@ GameObject:
   - component: {fileID: 1422071186}
   m_Layer: 0
   m_Name: TerrainGroup_0
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -389,7 +409,7 @@ GameObject:
   - component: {fileID: 1478289996}
   m_Layer: 0
   m_Name: Terrain_0_0_0adf0bfc-644c-4e92-9140-a731067bc356
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -477,13 +497,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1606218072254403745, guid: 361260e68005db343a7ce426a6ddc055, type: 3}
+      propertyPath: ballToUse
+      value: 
+      objectReference: {fileID: 1754811274245000944, guid: 4345d7212fb2baf49bfcdf2b489dd416, type: 3}
+    - target: {fileID: 1606218072254403745, guid: 361260e68005db343a7ce426a6ddc055, type: 3}
+      propertyPath: creatureToSummon
+      value: 
+      objectReference: {fileID: 5236676548472765922, guid: ebec000d3cfab8b4a9fa43f8539c4c09, type: 3}
     - target: {fileID: 1793296227904093283, guid: 361260e68005db343a7ce426a6ddc055, type: 3}
       propertyPath: m_Name
       value: Character
       objectReference: {fileID: 0}
+    - target: {fileID: 1793296227904093283, guid: 361260e68005db343a7ce426a6ddc055, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 8757188933665052754, guid: 361260e68005db343a7ce426a6ddc055, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.43
+      value: 17.56
       objectReference: {fileID: 0}
     - target: {fileID: 8757188933665052754, guid: 361260e68005db343a7ce426a6ddc055, type: 3}
       propertyPath: m_LocalPosition.y
@@ -491,7 +523,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8757188933665052754, guid: 361260e68005db343a7ce426a6ddc055, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.16
       objectReference: {fileID: 0}
     - target: {fileID: 8757188933665052754, guid: 361260e68005db343a7ce426a6ddc055, type: 3}
       propertyPath: m_LocalRotation.w
