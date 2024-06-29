@@ -339,7 +339,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 983420325}
-  creature: {fileID: 0}
 --- !u!1 &983420325 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1793296227904093283, guid: 361260e68005db343a7ce426a6ddc055, type: 3}
@@ -501,6 +500,10 @@ PrefabInstance:
       propertyPath: ballToUse
       value: 
       objectReference: {fileID: 1754811274245000944, guid: 4345d7212fb2baf49bfcdf2b489dd416, type: 3}
+    - target: {fileID: 1606218072254403745, guid: 361260e68005db343a7ce426a6ddc055, type: 3}
+      propertyPath: creatureToSpawn
+      value: 
+      objectReference: {fileID: 5236676548472765922, guid: ebec000d3cfab8b4a9fa43f8539c4c09, type: 3}
     - target: {fileID: 1606218072254403745, guid: 361260e68005db343a7ce426a6ddc055, type: 3}
       propertyPath: creatureToSummon
       value: 

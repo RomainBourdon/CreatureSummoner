@@ -46,7 +46,7 @@ public class CameraMultiController : MonoBehaviour
     void LateUpdate()
     {
         //Activate camera controls on mouse click
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             UnityEngine.Cursor.lockState = CursorLockMode.Locked;
             UnityEngine.Cursor.visible = false;
@@ -66,14 +66,15 @@ public class CameraMultiController : MonoBehaviour
             OrbitUpdate();
         }
 
-        if(newFollowTarget ==  followTarget)
+        if(swapController.GetCurrentTarget() ==  followTarget)
         {
             transform.position = (followTarget ? followTarget.position : Vector3.zero) + focalOffset - transform.forward * viewDistance;
         }
         else
         {
+            ChangeFollowTarget(swapController.GetCurrentTarget().transform);
             newCamPosition = newFollowTarget.position + focalOffset - transform.forward * viewDistance;
-            transform.position = Vector3.Slerp(transform.position, newCamPosition, 10 * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, newCamPosition, 10 * Time.deltaTime);
 
             if (Mathf.Approximately(transform.position.x, newCamPosition.x))
             {
@@ -93,10 +94,12 @@ public class CameraMultiController : MonoBehaviour
 
     public void ChangeFollowTarget(Transform _newFollowTarget)
     {
-        newFollowTarget = _newFollowTarget;
-        viewDistance = Mathf.Clamp(viewDistance + Input.mouseScrollDelta.y * Time.deltaTime * -scrollSensitivity, 2.0f, 300.0f);
-        newCamPosition = newFollowTarget.position + focalOffset - transform.forward * viewDistance;
-        Debug.Log(newCamPosition);
+        if (newFollowTarget != _newFollowTarget)
+        {
+            newFollowTarget = _newFollowTarget;
+            viewDistance = Mathf.Clamp(viewDistance + Input.mouseScrollDelta.y * Time.deltaTime * -scrollSensitivity, 2.0f, 300.0f);
+            newCamPosition = newFollowTarget.position + focalOffset - transform.forward * viewDistance;
+        }
     }
 }
 

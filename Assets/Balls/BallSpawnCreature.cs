@@ -1,12 +1,13 @@
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class BallSpawnCreature : MonoBehaviour
 {
 
-    public GameObject creatureInBall;
-    public GameObject spawnedCreature;
-    public GameObject playerCharacter;
-    public GameObject thirdPersonCamera;
+    private GameObject creatureInBall;
+    private GameObject spawnedCreature;
+    private GameObject playerCharacter;
+    private GameObject thirdPersonCamera;
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Floor")
@@ -15,11 +16,18 @@ public class BallSpawnCreature : MonoBehaviour
 
             spawnedCreature = Instantiate(creatureInBall, new Vector3 (collision.contacts[0].point.x, collision.contacts[0].point.y +1, collision.contacts[0].point.z), Quaternion.identity);
 
-            spawnedCreature.AddComponent<CharacterMovement>();
-            playerCharacter.GetComponent<CharacterMovement>().enabled = false;
             thirdPersonCamera = Camera.main.gameObject;
-            thirdPersonCamera.GetComponent<CameraMultiController>().ChangeFollowTarget(spawnedCreature.transform);
-            thirdPersonCamera.GetComponent<SwapController>().creature = spawnedCreature.gameObject;
+            thirdPersonCamera.GetComponent<SwapController>().SwitchToCreature(spawnedCreature.gameObject);
         }
+    }
+
+    public void SetCreaturInBall(GameObject _creatureInBall)
+    {
+        creatureInBall = _creatureInBall;
+    }
+
+    public void SetPlayer(GameObject _player)
+    {
+        playerCharacter = _player;
     }
 }
