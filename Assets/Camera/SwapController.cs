@@ -55,19 +55,12 @@ public class SwapController : MonoBehaviour
         {
             creature.AddComponent<CharacterMovement>();
         }
-        else
-        {
-            creature.GetComponent<CharacterMovement>().enabled = true;
-        }
-        player.GetComponent<CharacterMovement>().enabled = false;
         currentTarget = creature;
     }
 
     public void SwitchToPlayer()
     {
         Debug.Log("switch to player");
-        creature.GetComponent<CharacterMovement>().enabled = false;
-        player.GetComponent<CharacterMovement>().enabled = true;
         currentTarget = player;
     }
    
